@@ -21,6 +21,14 @@ import javax.swing.JTextField;
 public class CekNomorGanjilGenapView extends javax.swing.JFrame {
     
 
+    private boolean isPrime(int number) {
+    if (number <= 1) return false;
+    for (int i = 2; i <= Math.sqrt(number); i++) {
+        if (number % i == 0) return false;
+    }
+    return true;
+}
+
     /**
      * Creates new form CekNomorGanjilGenapView
      */
@@ -213,38 +221,53 @@ public class CekNomorGanjilGenapView extends javax.swing.JFrame {
     private void btnCekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekActionPerformed
         // TODO add your handling code here:
                                               
+    //try {
+        // Ambil input dari txtInput, hapus spasi dengan trim() dan ubah ke integer
+      //  int angka = Integer.parseInt(txtInput.getText().trim());
+        
+        // Logika untuk menentukan genap atau ganjil
+        //if (angka % 2 == 0) {
+        //    lblHasil.setText("Angka " + angka + " adalah Genap."); // Tampilkan hasil jika genap
+        //} else {
+      //      lblHasil.setText("Angka " + angka + " adalah Ganjil."); // Tampilkan hasil jika ganjil
+        //}
+    //} catch (NumberFormatException e) {
+        // Tampilkan pesan error jika input tidak valid
+      //  JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!", "Error", JOptionPane.ERROR_MESSAGE);
+    //}
+    
     try {
         // Ambil input dari txtInput, hapus spasi dengan trim() dan ubah ke integer
         int angka = Integer.parseInt(txtInput.getText().trim());
         
         // Logika untuk menentukan genap atau ganjil
+        String hasil = "Angka " + angka;
         if (angka % 2 == 0) {
-            lblHasil.setText("Angka " + angka + " adalah Genap."); // Tampilkan hasil jika genap
+            hasil += " adalah Genap.";
         } else {
-            lblHasil.setText("Angka " + angka + " adalah Ganjil."); // Tampilkan hasil jika ganjil
+            hasil += " adalah Ganjil.";
         }
+
+        // Tambahkan pemeriksaan bilangan prima
+        if (isPrime(angka)) {
+            hasil += " Ini adalah bilangan prima.";
+        } else {
+            hasil += " Ini bukan bilangan prima.";
+        }
+
+        // Tampilkan hasil di lblHasil
+        lblHasil.setText(hasil);
     } catch (NumberFormatException e) {
         // Tampilkan pesan error jika input tidak valid
         JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!", "Error", JOptionPane.ERROR_MESSAGE);
     }
     
-    
 
 
     }//GEN-LAST:event_btnCekActionPerformed
 
-    // Method untuk mengecek apakah angka adalah bilangan prima
-    private boolean isPrime(int number) {
-        if (number <= 1) {
-            return false;
-        }
-        for (int i = 2; i <= Math.sqrt(number); i++) {
-            if (number % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
+    
+    
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
