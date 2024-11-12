@@ -1,6 +1,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
@@ -40,7 +42,17 @@ public class CekNomorGanjilGenapView extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set agar aplikasi tertutup saat jendela ditutup
         setLayout(null);                       // Set layout manual (null layout)
 
-        
+        // Tambahkan FocusListener pada txtInput untuk membersihkan saat mendapatkan fokus
+        txtInput.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+                // Kosongkan JTextField saat mendapatkan fokus
+                txtInput.setText("");
+            }
+
+            public void focusLost(FocusEvent e) {
+                // Tidak ada tindakan saat kehilangan fokus
+            }
+        });
 
         // Tambahkan KeyAdapter pada txtInput untuk membatasi input hanya angka
         txtInput.addKeyListener(new KeyAdapter() {
@@ -121,6 +133,15 @@ public class CekNomorGanjilGenapView extends javax.swing.JFrame {
         lblHasil.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 18)); // NOI18N
         lblHasil.setForeground(new java.awt.Color(255, 255, 255));
         lblHasil.setText("Hasil :");
+
+        txtInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtInputFocusLost(evt);
+            }
+        });
 
         btnCek.setText("Cek");
         btnCek.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +257,7 @@ public class CekNomorGanjilGenapView extends javax.swing.JFrame {
       //  JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!", "Error", JOptionPane.ERROR_MESSAGE);
     //}
     
-    try {
+   try {
         // Ambil input dari txtInput, hapus spasi dengan trim() dan ubah ke integer
         int angka = Integer.parseInt(txtInput.getText().trim());
         
@@ -255,8 +276,8 @@ public class CekNomorGanjilGenapView extends javax.swing.JFrame {
             hasil += " Ini bukan bilangan prima.";
         }
 
-        // Tampilkan hasil di lblHasil
-        lblHasil.setText(hasil);
+        // Tampilkan hasil menggunakan JOptionPane
+        JOptionPane.showMessageDialog(this, hasil, "Hasil", JOptionPane.INFORMATION_MESSAGE);
     } catch (NumberFormatException e) {
         // Tampilkan pesan error jika input tidak valid
         JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -283,6 +304,16 @@ public class CekNomorGanjilGenapView extends javax.swing.JFrame {
                 lblHasil.setText("Hasil :"); // Reset hasil ke teks awal
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInputFocusGained
+        // TODO add your handling code here:
+        // Kosongkan JTextField saat mendapatkan fokus
+    txtInput.setText("");
+    }//GEN-LAST:event_txtInputFocusGained
+
+    private void txtInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInputFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInputFocusLost
 
     /**
      * @param args the command line arguments
